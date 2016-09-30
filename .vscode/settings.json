@@ -1,0 +1,8 @@
+// Workspace settings
+{
+    // The following will hide the js and map files in the editor
+    "files.exclude": {
+        "app/**/*.js": true,
+        "app/**/*.map": true
+    }
+}
