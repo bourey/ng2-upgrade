@@ -1,34 +1,11 @@
-import { NgModule, forwardRef } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+// import polyfills
+import 'angular';
+import 'angular-route';
+import {galleryApp} from './app.module';
 
-import { adapter } from './upgrade';
-import {ArtistsComponentModule} from './artists/artists.component';
+//angular.bootstrap(document.body, [galleryApp.name]);
 
-@NgModule({
-  imports: [BrowserModule]
-})
-class AppModule {}
+import {bootstrap} from './app.module'
 
-let galleryApp = angular.module('galleryApp', [
-    'ngRoute',
-    'ngAria',
-    'ngAnimate',
-    'ngMaterial',
-    'ngMdIcons',
-    ArtistsComponentModule.name
-]);
+bootstrap(document.body);
 
-galleryApp.config(function($routeProvider: angular.route.IRouteProvider) {
-    $routeProvider.when('/', { templateUrl: '/app/welcome.html' });
-});
-
-galleryApp.run(function($rootScope: ng.IRootScopeService) {
-    $rootScope.$on('$routeChangeStart', function() {
-        $rootScope['loading'] = true;
-    });
-    $rootScope.$on('$routeChangeSuccess', function() {
-        $rootScope['loading'] = false;
-    });
-});
-
-adapter.bootstrap(document.body, ['galleryApp']);
