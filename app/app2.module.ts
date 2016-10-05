@@ -4,16 +4,13 @@ import { Injector, NgModule, NgZone, NgModuleFactoryLoader, Compiler } from '@an
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, RouterOutletMap, UrlSerializer, RouterModule } from '@angular/router';
 import { UpgradeAdapter } from '@angular/upgrade';
-import { ArtistCmp } from './artists/artists.module';
+import { ArtistsComponentModule } from './artists/artists.module';
 import { Ng2RouteModule } from './app.module';
 import { FakeRootCmp, UpgradeRouter, ModuleRootCmp, configureModuleRoot } from './upgrade/router_upgrade';
 
-let NG2_ROUTES = [ {
-  path : 'artists',
-  children : [
-    {path : 'degas', component : ArtistCmp},
-  ]
-} ];
+let NG2_ROUTES = [
+    { path: 'artists', loadChildren: () => ArtistsComponentModule }
+];
 
 export function createRouter(urlSerializer: UrlSerializer,
   outletMap: RouterOutletMap,
@@ -38,8 +35,8 @@ export function createRouter(urlSerializer: UrlSerializer,
 
 
 @NgModule({
-  imports: [BrowserModule, RouterModule.forRoot(NG2_ROUTES, {useHash: true})],
-  declarations: [ArtistCmp, ModuleRootCmp],
+  imports: [ArtistsComponentModule, BrowserModule, RouterModule.forRoot(NG2_ROUTES, {useHash: true})],
+  declarations: [ModuleRootCmp],
   providers: [
     {
       provide : Router,

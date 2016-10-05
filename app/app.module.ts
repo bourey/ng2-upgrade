@@ -6,7 +6,6 @@ export const Ng2RouteModule = angular.module('Ng2RouteModule', []);
 function configRoutes($routeProvider: angular.route.IRouteProvider) {
   // everything here is angular 2
   $routeProvider.when('/artists/:t', {template : '<module-root></module-root>'});
-  $routeProvider.when('/artists2/:t', {template : '<module-root></module-root>'});
 };
 Ng2RouteModule.config(configRoutes);
 

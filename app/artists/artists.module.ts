@@ -10,26 +10,13 @@ import { RouterModule } from '@angular/router';
 export class ArtistCmp {
 }
 
-// @Component({
-//   selector: 'artist2',
-//   template : `
-//     <h1>Degas</h1>
-//   `
-// })
-// export class Artist2Cmp {
-// }
+let ROUTES = [{
+  path : 'degas', component: ArtistCmp
+}];
 
 
-// let ROUTES = [{
-//   path : 'artists',
-//   children : [
-//     {path : 'degas', component : Artist2Cmp},
-//   ]
-// }];
-
-
-// @NgModule({
-//   imports: [RouterModule.forChild(ROUTES)],
-//   declarations: [Artist2Cmp]
-// })
-// export class ArtistsComponentModule {}
+@NgModule({
+  imports: [RouterModule.forChild(ROUTES)],
+  declarations: [ArtistCmp]
+})
+export class ArtistsComponentModule {}
