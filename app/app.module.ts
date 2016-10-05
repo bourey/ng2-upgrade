@@ -30,7 +30,8 @@ function configLoading($rootScope: ng.IRootScopeService) {
 };
 galleryApp.run(configLoading);
 
-galleryApp.component('rootCmp', {
+/** Component containing the ng1-router-controller ng-view */
+galleryApp.component('galleryApp', {
     template : '<div class="ng-view"></div>',
     controllerAs : 'ctrl'
 });
