@@ -19,4 +19,4 @@ let ROUTES = [{
   imports: [RouterModule.forChild(ROUTES)],
   declarations: [ArtistCmp]
 })
-export class ArtistsComponentModule {}
+export default class ArtistsComponentModule {}

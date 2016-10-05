@@ -4,13 +4,8 @@ import { Injector, NgModule, NgZone, NgModuleFactoryLoader, Compiler } from '@an
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, RouterOutletMap, UrlSerializer, RouterModule } from '@angular/router';
 import { UpgradeAdapter } from '@angular/upgrade';
-import { ArtistsComponentModule } from './artists/artists.module';
-import { Ng2RouteModule } from './app.module';
+import { NG2_ROUTES, Ng2RouteModule, isNg2Route } from './ng2.routes';
 import { FakeRootCmp, UpgradeRouter, ModuleRootCmp, configureModuleRoot } from './upgrade/router_upgrade';
-
-let NG2_ROUTES = [
-    { path: 'artists', loadChildren: () => ArtistsComponentModule }
-];
 
 export function createRouter(urlSerializer: UrlSerializer,
   outletMap: RouterOutletMap,
@@ -23,7 +18,7 @@ export function createRouter(urlSerializer: UrlSerializer,
   return zone.run(() => {
     const r =
       new UpgradeRouter(FakeRootCmp, urlSerializer, outletMap,
-        location, injector, loader, compiler, NG2_ROUTES, (url: any) => url.startsWith("/artists"));
+        location, injector, loader, compiler, NG2_ROUTES, isNg2Route);
     setTimeout(() => {
       console.log("set up location listener");
       (<any>r).setUpLocationChangeListener();
@@ -35,7 +30,7 @@ export function createRouter(urlSerializer: UrlSerializer,
 
 
 @NgModule({
-  imports: [ArtistsComponentModule, BrowserModule, RouterModule.forRoot(NG2_ROUTES, {useHash: true})],
+  imports: [BrowserModule, RouterModule.forRoot(NG2_ROUTES, {useHash: true})],
   declarations: [ModuleRootCmp],
   providers: [
     {
