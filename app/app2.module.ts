@@ -8,7 +8,7 @@ import { NG2_ROUTES, Ng2RouteModule, isNg2Route } from './ng2.routes';
 import { FakeRootCmp, UpgradeRouter, ModuleRootCmp, configureModuleRoot } from './upgrade/router_upgrade';
 
 function createRouter(urlSerializer: UrlSerializer, outletMap: RouterOutletMap,
-    location: Location, injector: Injector, zone: NgZone, 
+    location: Location, injector: Injector, zone: NgZone,
     loader: NgModuleFactoryLoader, compiler: Compiler) {
 
   return zone.run(() => {
