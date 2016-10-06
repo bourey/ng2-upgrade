@@ -36,7 +36,7 @@ export class ArtistService {
     getArtist(key: string): Promise<Artist> {
         let artist = this.artists[key];
         return new Promise<Artist>(resolve =>
-            setTimeout(resolve, 2000)) // delay 2 seconds
+            setTimeout(resolve, delay))
             .then(() => artist);
     }
 

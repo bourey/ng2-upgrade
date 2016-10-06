@@ -1,32 +1,30 @@
-import { Component, Inject, Injectable, NgModule } from '@angular/core';
+import { Component, Inject, Injectable, NgModule, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Resolve, ActivatedRoute } from '@angular/router';
+import { Resolve, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Artist, ArtistService } from '../services/artist';
 
 @Component({
   selector: 'artist',
-  template : `
-    <h1>Degas</h1>
-    <p>{{artist.name}}</p>
-  `
+  templateUrl : 'app/artists/artist.component.html'
 })
-export class ArtistCmp {
+export class ArtistCmp implements OnInit {
   artist: Artist;
-  constructor(private route: ActivatedRoute) {
-    this.artist = route.snapshot.data['artist'];
+  constructor(private route: ActivatedRoute) { }
+  ngOnInit() {
+    this.artist = this.route.snapshot.data['artist'];
   }
 }
 
 @Injectable()
 class ArtistResolver implements Resolve<Artist> {
     constructor(@Inject('artistService') private artistService: ArtistService) {}
-   resolve(): Promise<Artist> {
-      return this.artistService.getArtist('degas');
+    resolve(route: ActivatedRouteSnapshot): Promise<Artist> {
+      return this.artistService.getArtist(route.params['artistId']);
     }
 }
 
 let ROUTES = [{
-  path : 'degas', component: ArtistCmp, resolve: {
+  path : ':artistId', component: ArtistCmp, resolve: {
     artist: ArtistResolver
   }
 }];
