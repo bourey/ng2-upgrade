@@ -1,5 +1,7 @@
 // ng1/2 hybrid
 import { Ng2RouteModule } from './ng2.routes';
+import { ArtistServiceModule } from './services/artist';
+import { LoadingModule } from './loading.module';
 
 /**
  * Root ng1 module for our application. This is the app that will be bootstrapped.
@@ -10,7 +12,9 @@ export const galleryApp = angular.module('galleryApp', [
     'ngAnimate',
     'ngMaterial',
     'ngMdIcons',
-    Ng2RouteModule.name
+    ArtistServiceModule.name,
+    LoadingModule.name,
+    Ng2RouteModule.name,
 ]);
 
 /** @ngInject */
@@ -18,17 +22,6 @@ function configRoutes($routeProvider: angular.route.IRouteProvider) {
     $routeProvider.when('/', { templateUrl: '/app/welcome.html' });
 };
 galleryApp.config(configRoutes);
-
-/** @ngInject */
-function configLoading($rootScope: ng.IRootScopeService) {
-    $rootScope.$on('$routeChangeStart', function() {
-        $rootScope['loading'] = true;
-    });
-    $rootScope.$on('$routeChangeSuccess', function() {
-        $rootScope['loading'] = false;
-    });
-};
-galleryApp.run(configLoading);
 
 /** Component containing the ng1-router-controller ng-view */
 galleryApp.component('galleryApp', {

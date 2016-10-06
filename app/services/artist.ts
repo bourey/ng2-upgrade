@@ -1,6 +1,5 @@
-import { NgModule, forwardRef } from '@angular/core';
 import { Painting } from '../services/painting';
-import { UpgradeAdapter } from '@angular/upgrade';
+import { adapter } from '../app2.module';
 
 let delay = 0;
 //let delay = 2000;
@@ -36,9 +35,9 @@ export class ArtistService {
 
     getArtist(key: string): Promise<Artist> {
         let artist = this.artists[key];
-        return this.$timeout(function(): Artist {
-            return artist;
-        }, delay);
+        return new Promise<Artist>(resolve =>
+            setTimeout(resolve, 2000)) // delay 2 seconds
+            .then(() => artist);
     }
 
     favoritePainting() {
@@ -48,11 +47,4 @@ export class ArtistService {
 
 export const ArtistServiceModule = angular.module('ArtistServiceModule', []);
 ArtistServiceModule.service('artistService', ArtistService);
-
-@NgModule({
-    declarations: []
-})
-export class ArtistServiceModule2 {}
-
-let adapter = new UpgradeAdapter(forwardRef(() => ArtistServiceModule2));
 adapter.upgradeNg1Provider('artistService');
