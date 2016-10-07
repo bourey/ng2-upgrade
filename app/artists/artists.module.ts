@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Artist, ArtistService } from '../services/artist';
 import { ArtistCmp } from './artist.component';
+import { adapter } from '../adapter';
 
 @Injectable()
 class ArtistResolver implements Resolve<Artist> {
@@ -23,6 +24,6 @@ let ROUTES = [{
 @NgModule({
   providers: [ArtistResolver],
   imports: [RouterModule.forChild(ROUTES)],
-  declarations: [ArtistCmp]
+  declarations: [ArtistCmp, adapter.upgradeNg1Component('broken')]
 })
 export class ArtistsComponentModule { }
