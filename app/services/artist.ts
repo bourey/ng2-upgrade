@@ -47,4 +47,3 @@ export class ArtistService {
 
 export const ArtistServiceModule = angular.module('ArtistServiceModule', []);
 ArtistServiceModule.service('artistService', ArtistService);
-adapter.upgradeNg1Provider('artistService');
