@@ -28,3 +28,7 @@ galleryApp.component('galleryApp', {
     template : '<div class="ng-view"></div>',
     controllerAs : 'ctrl'
 });
+
+galleryApp.component('broken', {
+    template: 'Hello?'
+});

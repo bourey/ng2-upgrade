@@ -1,6 +1,7 @@
 // Note: this file currently contains some annoying duplication.  It
 // would certainly be possible to put together a more sophisticated
 // implementation that only requires paths to be specified once.
+import { ArtistsComponentModule } from './artists/artists.module';
 
 /**
  * Determine if a specified path should be handled by ng2.
@@ -14,7 +15,7 @@ export function isNg2Route(url: string) {
  * The actual Angular 2 route map.
  */
 export const NG2_ROUTES = [
-    { path: 'artists', loadChildren: 'app/artists/artists.module' }
+    { path: 'artists', loadChildren: () => ArtistsComponentModule  }
 ];
 
 /**
