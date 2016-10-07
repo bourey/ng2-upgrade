@@ -1,5 +1,5 @@
 import { Painting } from '../services/painting';
-import { adapter } from '../app2.module';
+import { adapter } from '../adapter';
 
 let delay = 0;
 //let delay = 2000;

@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { galleryApp } from './app.module';
-import { adapter } from './app2.module';
+import { adapter } from './adapter';
 
 adapter.upgradeNg1Provider('loadingService');
 

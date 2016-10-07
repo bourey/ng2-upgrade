@@ -3,9 +3,8 @@ import { Location } from '@angular/common';
 import { Compiler, Injector, NgModule, NgZone, NgModuleFactoryLoader } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, RouterModule, RouterOutletMap, UrlSerializer } from '@angular/router';
-import { UpgradeAdapter } from '@angular/upgrade';
-import { NG2_ROUTES, Ng2RouteModule, isNg2Route } from './ng2.routes';
-import { FakeRootCmp, UpgradeRouter, ModuleRootCmp, configureModuleRoot } from './upgrade/router_upgrade';
+import { NG2_ROUTES, isNg2Route } from './ng2.routes';
+import { FakeRootCmp, UpgradeRouter, ModuleRootCmp } from './upgrade/router_upgrade';
 
 function createRouter(urlSerializer: UrlSerializer, outletMap: RouterOutletMap,
     location: Location, injector: Injector, zone: NgZone,
@@ -38,10 +37,4 @@ function createRouter(urlSerializer: UrlSerializer, outletMap: RouterOutletMap,
     }
   ]
 })
-class AppModule {}
-
-// Upgrade adapter
-export const adapter = new UpgradeAdapter(AppModule);
-
-configureModuleRoot(adapter, Ng2RouteModule);
-
+export class AppModule {}
