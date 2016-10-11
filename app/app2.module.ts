@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Router, RouterModule, RouterOutletMap, UrlSerializer } from '@angular/router';
 import { NG2_ROUTES, isNg2Route } from './ng2.routes';
 import { FakeRootCmp, UpgradeRouter, ModuleRootCmp } from './upgrade/router_upgrade';
+import {MdCoreModule} from '@angular2-material/core';
 
 function createRouter(urlSerializer: UrlSerializer, outletMap: RouterOutletMap,
     location: Location, injector: Injector, zone: NgZone,
@@ -25,7 +26,7 @@ function createRouter(urlSerializer: UrlSerializer, outletMap: RouterOutletMap,
  * Root module for angular 2 for the app.
  */
 @NgModule({
-  imports: [BrowserModule, RouterModule.forRoot(NG2_ROUTES, {useHash: true})],
+  imports: [BrowserModule, MdCoreModule, RouterModule.forRoot(NG2_ROUTES, {useHash: true})],
   declarations: [ModuleRootCmp],
   providers: [
     {

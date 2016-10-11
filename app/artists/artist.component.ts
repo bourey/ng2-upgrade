@@ -13,5 +13,6 @@ export class ArtistCmp implements OnInit {
 
   ngOnInit() {
     this.artist = this.route.snapshot.data['artist'];
+    console.log(this.artist);
   }
 }
