@@ -1,4 +1,4 @@
-import { Painting } from './services/painting';
+import { Painting } from '../painting/painting';
 
 class PaintingGridController {
     layout: Painting[][];
@@ -11,9 +11,9 @@ class PaintingGridController {
     }
 }
 
-export const PaintingGridModule = angular.module('paintingGrid', []);
-PaintingGridModule.component('paintingGrid', {
-  templateUrl: '/app/painting-grid.component.html',
+export const paintingGridModule = angular.module('paintingGrid', []);
+paintingGridModule.component('paintingGrid', {
+  templateUrl: '/app/common/painting/painting-grid.component.html',
   controller: PaintingGridController,
   controllerAs: 'gridCtrl',
   bindings: {

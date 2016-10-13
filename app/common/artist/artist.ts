@@ -1,5 +1,4 @@
-import { Painting } from '../services/painting';
-import { adapter } from '../adapter';
+import { Painting } from '../painting/painting';
 
 let delay = 0;
 //let delay = 2000;

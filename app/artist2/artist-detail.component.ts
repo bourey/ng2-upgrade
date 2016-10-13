@@ -4,9 +4,9 @@ import { Artist } from '../services/artist';
 
 @Component({
   selector: 'artist',
-  templateUrl : 'app/artists/artist.component.html'
+  templateUrl : 'app/artists/artist-detail.component.html'
 })
-export class ArtistCmp implements OnInit {
+export class ArtistDetailCmp implements OnInit {
   artist: Artist;
 
   constructor(private route: ActivatedRoute) { }
