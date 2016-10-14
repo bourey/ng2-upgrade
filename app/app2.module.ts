@@ -1,41 +1,45 @@
 // ng1/2 hybrid
-import { Location } from '@angular/common';
-import { Compiler, Injector, NgModule, NgZone, NgModuleFactoryLoader } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Router, RouterModule, RouterOutletMap, UrlSerializer } from '@angular/router';
-import { NG2_ROUTES, isNg2Route } from './ng2.routes';
-import { FakeRootCmp, UpgradeRouter, ModuleRootCmp } from './upgrade/router_upgrade';
-import {MdCoreModule} from '@angular2-material/core';
+import { Router, RouterModule, UrlHandlingStrategy } from '@angular/router';
+import { UpgradeAdapter } from '@angular/upgrade';
+import { MdCoreModule } from '@angular2-material/core';
+import { galleryApp } from './app.module';
+import { ArtistsModule } from './artist2/artist.module';
+import { ArtistService2Module } from './common/artist/artist'
+import { Ng2RouterRoot, createAngular1RootModule} from './upgrade_utils';
 
-function createRouter(urlSerializer: UrlSerializer, outletMap: RouterOutletMap,
-    location: Location, injector: Injector, zone: NgZone,
-    loader: NgModuleFactoryLoader, compiler: Compiler) {
-
-  return zone.run(() => {
-    const r = new UpgradeRouter(FakeRootCmp, urlSerializer, outletMap,
-        location, injector, loader, compiler, NG2_ROUTES, isNg2Route);
-    setTimeout(() => {
-      (<any>r).setUpLocationChangeListener();
-    }, 0);
-
-    return r;
-  });
+// This URL handling strategy is custom and application-specific.
+// Using it we can tell the Angular 2 router to handle only URL starting with settings.
+class Ng1Ng2UrlHandlingStrategy implements UrlHandlingStrategy {
+  shouldProcessUrl(url: any) { return url.toString().startsWith('/artists'); }
+  extract(url: any) { return url; }
+  merge(url: any, whole: any) { return url; }
 }
 
 /**
  * Root module for angular 2 for the app.
  */
 @NgModule({
-  imports: [BrowserModule, MdCoreModule, RouterModule.forRoot(NG2_ROUTES, {useHash: true})],
-  declarations: [ModuleRootCmp],
+  imports: [ArtistsModule, ArtistService2Module, BrowserModule, MdCoreModule, RouterModule.forRoot([], {useHash: true})],
+  declarations: [Ng2RouterRoot],
   providers: [
-    {
-      provide : Router,
-      useFactory : createRouter,
-      deps : [
-        UrlSerializer, RouterOutletMap, Location, Injector, NgZone, NgModuleFactoryLoader, Compiler
-      ]
-    }
+    { provide: UrlHandlingStrategy, useClass: Ng1Ng2UrlHandlingStrategy }
   ]
 })
 export class AppModule {}
+
+const adapter = new UpgradeAdapter(AppModule);
+ArtistsModule.setAdapter(adapter);
+ArtistService2Module.setAdapter(adapter);
+
+createAngular1RootModule(adapter, ['ngRoute', galleryApp.name]);
+
+export function bootstrap(el: Element) {
+  const ref = adapter.bootstrap(el, ['rootModule']);
+
+  // this is required because of a bug in NgUpgrade
+  setTimeout(() => {
+    ref.ng2Injector.get(Router).initialNavigation();
+  }, 0);
+}

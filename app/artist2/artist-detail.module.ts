@@ -1,9 +1,8 @@
 import { Inject, Injectable, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Artist, ArtistService } from '../services/artist';
+import { Artist, ArtistService } from '../common/artist/artist';
 import { ArtistDetailCmp } from './artist-detail.component';
-import { PaintingGridModule } from '../painting/painting-grid2';
 
 @Injectable()
 class ArtistResolver implements Resolve<Artist> {
@@ -15,7 +14,7 @@ class ArtistResolver implements Resolve<Artist> {
 }
 
 let ROUTES = [{
-  path : ':artistId', component: ArtistDetailCmp, resolve: {
+  path : '', component: ArtistDetailCmp, resolve: {
     artist: ArtistResolver
   }
 }];
@@ -23,7 +22,7 @@ let ROUTES = [{
 
 @NgModule({
   providers: [ArtistResolver],
-  imports: [PaintingGridModule, RouterModule.forChild(ROUTES)],
+  imports: [RouterModule.forChild(ROUTES)],
   declarations: [ArtistDetailCmp]
 })
 export default class ArtistsComponentModule { }

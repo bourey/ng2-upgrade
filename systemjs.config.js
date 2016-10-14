@@ -24,6 +24,10 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
       '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
 
+      '@angular2-material/button': 'npm:@angular2-material/button/button.umd.js',
+      '@angular2-material/card': 'npm:@angular2-material/card/card.umd.js',
+      '@angular2-material/core': 'npm:@angular2-material/core/core.umd.js',
+
       "angular": "npm:angular/angular.js",
       "angular-route": "npm:angular-route/angular-route.js",
 

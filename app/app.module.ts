@@ -1,8 +1,7 @@
 // ng1/2 hybrid
-import { Ng2RouteModule } from './ng2.routes';
 import { ArtistServiceModule } from './common/artist/artist';
 import { LoadingModule } from './loading.module';
-import { artistModule } from './artist1/artist.module';
+//import { artistModule } from './artist1/artist.module';
 import { paintingModule } from './painting/painting.module';
 
 /**
@@ -14,11 +13,10 @@ export const galleryApp = angular.module('galleryApp', [
     'ngAnimate',
     'ngMaterial',
     'ngMdIcons',
-    artistModule.name,
+//    artistModule.name,
     paintingModule.name,
     ArtistServiceModule.name,
     LoadingModule.name,
-    Ng2RouteModule.name,
 ]);
 
 /** @ngInject */

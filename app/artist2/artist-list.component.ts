@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-    templateUrl: 'app/artists/artist-list.component.html'
+    templateUrl: 'app/artist2/artist-list.component.html'
 })
 export class ArtistListCmp { }

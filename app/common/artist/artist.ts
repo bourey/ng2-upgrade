@@ -1,3 +1,6 @@
+import { NgModule } from '@angular/core';
+import { UpgradeAdapter } from '@angular/upgrade';
+
 import { Painting } from '../painting/painting';
 
 let delay = 0;
@@ -21,12 +24,12 @@ export class ArtistService {
         this.$timeout = $timeout;
         this.artists = {
             'degas': new Artist('Edgar Degas', [
-                new Painting('La Classe de Danse', '1873–1876', 'ballet.jpg'),
-                new Painting('At the Races', '1877-1880', 'races.jpg'),
+                new Painting('1', 'La Classe de Danse', '1873–1876', 'ballet.jpg', '1'),
+                new Painting('1', 'At the Races', '1877-1880', 'races.jpg', '1'),
             ]),
             'renoir': new Artist('Pierre-Auguste Renoir', [
-                new Painting('By the Water', '1880', 'water.jpg'),
-                new Painting('Still Life: Flowers', '1885', 'flowers.jpg')
+                new Painting('1', 'By the Water', '1880', 'water.jpg', '1'),
+                new Painting('1', 'Still Life: Flowers', '1885', 'flowers.jpg', '1')
             ]),
             'monet': new Artist('Claude Monet', [])
         };
@@ -46,3 +49,10 @@ export class ArtistService {
 
 export const ArtistServiceModule = angular.module('ArtistServiceModule', []);
 ArtistServiceModule.service('artistService', ArtistService);
+
+@NgModule()
+export class ArtistService2Module {
+  static setAdapter(adapter: UpgradeAdapter) {
+    adapter.upgradeNg1Provider('artistService');
+  }
+}
