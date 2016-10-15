@@ -1,4 +1,5 @@
 import { Inject, Injectable, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Artist } from '../common/artist/artist';
@@ -34,8 +35,8 @@ let ROUTES = [{
 
 
 @NgModule({
+  declarations: [ArtistDetailCmp],
+  imports: [CommonModule, RouterModule.forChild(ROUTES)],
   providers: [ArtistResolver, PaintingsResolver],
-  imports: [RouterModule.forChild(ROUTES)],
-  declarations: [ArtistDetailCmp]
 })
 export default class ArtistsComponentModule { }

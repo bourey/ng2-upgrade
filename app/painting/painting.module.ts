@@ -12,7 +12,6 @@ export const paintingModule = angular.module('paintingModule', [
 
 /** @ngInject */
 let resolvePaintings = function(paintingService: PaintingService): Promise<Painting[]> {
-    console.log('getting');
     return paintingService.getPaintings();
 };
 

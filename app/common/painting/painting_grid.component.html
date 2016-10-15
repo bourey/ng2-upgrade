@@ -1,7 +1,7 @@
 <md-content class="md-padding" layout-xs="column" layout="row">
     <div ng-repeat="col in gridCtrl.layout" flex-xs flex-gt-xs="33" layout="column">
         <md-card ng-repeat="painting in col">
-            <img ng-src="/app/images/{{painting.imgUrl}}" class="md-card-image" alt="{{painting.name}}">
+            <img ng-src="/app/images/{{painting.id}}.jpg" class="md-card-image" alt="{{painting.name}}">
             <md-card-title>
                 <md-card-title-text>
                 <span class="md-headline">{{painting.name}}</span>

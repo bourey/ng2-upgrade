@@ -3,6 +3,8 @@ import { UpgradeAdapter } from '@angular/upgrade';
 
 import { Painting } from './painting';
 
+let delay = 0;
+
 export class PaintingService {
     paintings: Painting[] = [
         new Painting('ballet', 'La Classe de Danse', '1873–1876', 'degas'),
@@ -11,24 +13,27 @@ export class PaintingService {
         new Painting('flowers', 'Still Life: Flowers', '1885', 'renoir'),
     ];
 
-    constructor(private $q: any) { }
+    constructor(private $timeout: ng.ITimeoutService) { }
 
     getPainting(id: string): Promise<Painting> {
         let match = this.paintings.find(function(painting: Painting) {
             return painting.id === id;
         });
-        return this.$q.when().then(() => match);
+        return new Promise<Painting>(resolve => setTimeout(resolve, delay)).
+            then(() => match);
     }
 
     getPaintingsForArtist(artistId: string): Promise<Painting[]> {
         let matches = this.paintings.filter(function(painting: Painting) {
             return painting.artistId === artistId;
         });
-        return this.$q.when().then(() => matches);
+        return new Promise<Painting>(resolve => setTimeout(resolve, delay)).
+            then(() => matches);
     }
 
     getPaintings(): Promise<Painting[]> {
-        return this.$q.when().then(() => this.paintings);
+        return new Promise<Painting>(resolve => setTimeout(resolve, delay)).
+            then(() => this.paintings);
     }
 }
 
