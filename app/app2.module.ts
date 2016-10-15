@@ -6,7 +6,8 @@ import { UpgradeAdapter } from '@angular/upgrade';
 import { MdCoreModule } from '@angular2-material/core';
 import { galleryApp } from './app.module';
 import { ArtistsModule } from './artist2/artist.module';
-import { ArtistService2Module } from './common/artist/artist'
+import { ArtistService2Module } from './common/artist/artist.service';
+import { PaintingService2Module } from './common/painting/painting.service';
 import { Ng2RouterRoot, createAngular1RootModule} from './upgrade_utils';
 
 // This URL handling strategy is custom and application-specific.
@@ -21,7 +22,8 @@ class Ng1Ng2UrlHandlingStrategy implements UrlHandlingStrategy {
  * Root module for angular 2 for the app.
  */
 @NgModule({
-  imports: [ArtistsModule, ArtistService2Module, BrowserModule, MdCoreModule, RouterModule.forRoot([], {useHash: true})],
+  imports: [ArtistsModule, ArtistService2Module, BrowserModule, MdCoreModule,
+    RouterModule.forRoot([], {useHash: true})],
   declarations: [Ng2RouterRoot],
   providers: [
     { provide: UrlHandlingStrategy, useClass: Ng1Ng2UrlHandlingStrategy }
@@ -30,13 +32,13 @@ class Ng1Ng2UrlHandlingStrategy implements UrlHandlingStrategy {
 export class AppModule {}
 
 const adapter = new UpgradeAdapter(AppModule);
-ArtistsModule.setAdapter(adapter);
 ArtistService2Module.setAdapter(adapter);
+PaintingService2Module.setAdapter(adapter);
 
-createAngular1RootModule(adapter, ['ngRoute', galleryApp.name]);
+let rootModule = createAngular1RootModule(adapter, ['ngRoute', galleryApp.name]);
 
 export function bootstrap(el: Element) {
-  const ref = adapter.bootstrap(el, ['rootModule']);
+  const ref = adapter.bootstrap(el, [rootModule.name]);
 
   // this is required because of a bug in NgUpgrade
   setTimeout(() => {

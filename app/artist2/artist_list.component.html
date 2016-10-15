@@ -1,0 +1,8 @@
+<h1>Artists</h1>
+
+<h2>Impressionists</h2>
+<ul>
+    <li *ngFor="let artist of artists">
+        <a href="#/artists/{{artist.id}}">{{artist.name}}</a>
+    </li>
+</ul>

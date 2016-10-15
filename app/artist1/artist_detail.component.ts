@@ -1,4 +1,5 @@
-import { Artist, ArtistService } from '../common/artist/artist';
+import { Artist } from '../common/artist/artist';
+import { ArtistService } from '../common/artist/artist.service';
 
 /** @ngInject */
 export function resolveArtist(artistService: ArtistService) {

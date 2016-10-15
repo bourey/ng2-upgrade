@@ -13,7 +13,7 @@ class PaintingGridController {
 
 export const paintingGridModule = angular.module('paintingGrid', []);
 paintingGridModule.component('paintingGrid', {
-  templateUrl: '/app/common/painting/painting-grid.component.html',
+  templateUrl: '/app/common/painting/painting_grid.component.html',
   controller: PaintingGridController,
   controllerAs: 'gridCtrl',
   bindings: {

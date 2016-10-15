@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UpgradeAdapter } from '@angular/upgrade';
 
 let ROUTES = [
     { path: 'artists', children: [
-        { path: '', loadChildren: 'app/artist2/artist-list.module' },
-        { path: ':artistId', loadChildren: 'app/artist2/artist-detail.module' }
+        { path: '', loadChildren: 'app/artist2/artist_list.module' },
+        { path: ':artistId', loadChildren: 'app/artist2/artist_detail.module' }
     ]}
 ];
 
@@ -13,6 +12,4 @@ let ROUTES = [
 @NgModule({
   imports: [RouterModule.forChild(ROUTES)],
 })
-export class ArtistsModule {
-    static setAdapter(adapter: UpgradeAdapter) {}
-}
+export class ArtistsModule {}
